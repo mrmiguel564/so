@@ -1,40 +1,29 @@
 Integrantes:
-    Patricio Hinojosa   Patricio.hinojosa@alumnos.uv.cl
-    Brandon Diaz        Brandon.Diaz@alumnos.uv.cl
+    Miguel Espinoza       Miguel.espinoza@alumnos.uv.cl 	19773392-6
+    Silvio Vera			  Silvio.vera@alumnos.uv.cl      	19339408-6
+    
 Solución:
-    Para la solucion lo que se realizo, primero fue generar la funcion contarParcial, 
-    de forma tal que esta funcion funcione bajo el paradigma de dividir y vencer, 
-    una vez realizada la funcion,se procedio a leer la documentacion de la libreria
-    thread y mutex utilizada luego para generar los threads.
-    
-    para la division en threads lo que hicimosfue generar particiones en base a la cantidad 
-    de  threads que se pasaban como argumento al main, luego se dividia el total de elementos
-    en el vector por la cantidad de threads a utilizar, y luego se genera un vector de threads
-    en cada vector se utiliza la funcion  contarParcial, luego de esto identificamos la zona critica
-    esta estaba dentr de la funcion contarParcial:
+    Para la solución de la tarea N°2 lo que realizamos fue generar un arreglo el cual 
+    monitorea el avance en el proceso revisando que porcentaje del archivo se lleva
+    escaneado, esto gracias al numero de caracteres deseados ingresados por consola por
+  	el usuario.
 
-    void contarParcial(char x,unsigned int inicio, unsigned int final) {
-	
-        for(unsigned int i = inicio; i<=final; i++){
-            if(x == v[i]){
-                contador+=1;//zona critica
-            }
-        }
-    }
-    Luego de identificarla se procedio a utilizar la libreria mutex:
-
-    void contarParcial(char x,unsigned int inicio, unsigned int final) {
-	
-        for(unsigned int i = inicio; i<=final; i++){
-            if(x == v[i]){
-                BlockVect.lock();//bloqueo por mutex
-                contador+=1;//zona critica
-                BlockVect.unlock();//desbloqueo
-            }
-        }
-    
-
-    }
+  	Para la realizacion de lo anterior lo que hicismos fue modificar un for() el cual tomara
+  	el numero de caracteres leidos por el programa y lo dividiese por el total de elementos
+  	de esta manera obteniendo el porcentaje de avance de este, ademas en este mismo agregar
+  	mediante una arreglo de caracteres una barra de carga simple para que fuese visible el 
+  	avance del proceso, la cual se va llenando a medida que se calcula el porcentaje de 
+  	avance, rellenando asi un arreglo a la vez que este se muestra en la terminal.
 
 
+	for(size_t i=0; i < totalElementos; i++){
+		double porcentaje = double(i)/double(totalElementos-1)*100.;
+		for(auto j=1 ; j<porcentaje; j++){
+			carga[j]='\\';
+		}
+		std::cout << "\r\033[K" << carga << int(porcentaje) <<'%'; //linea qla
+		fflush(stdout);
+		uint8_t tmpLetra = nRandom(rng);
+		v.push_back( tmpLetra );
+	}
 
